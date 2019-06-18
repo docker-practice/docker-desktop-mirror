@@ -1,0 +1,9 @@
+language: go
+
+script:
+- go get github.com/aktau/github-release
+- github-release --help
+- curl https://download.docker.com/win/edge/Docker%20Desktop%20Installer.exe -O
+- curl https://download.docker.com/mac/edge/Docker.dmg -O
+- github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag edge --name "Docker.exe" --file "Docker Desktop Installer.exe" -R
+- github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag edge --name "Docker.dmg" --file "Docker.dmg" -R

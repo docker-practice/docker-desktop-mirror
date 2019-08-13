@@ -5,7 +5,5 @@ script:
 - github-release --help
 - curl https://download.docker.com/win/edge/Docker%20Desktop%20Installer.exe -o Docker.exe
 - curl https://download.docker.com/mac/edge/Docker.dmg -O
-- curl https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe -o Docker-wsl2.exe
 - github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag edge --name "Docker.exe" --file "Docker.exe" -R
 - github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag edge --name "Docker.dmg" --file "Docker.dmg" -R
-- github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag edge --name "Docker-wsl2.exe" --file "Docker-wsl2.exe" -R

@@ -28,6 +28,6 @@ jobs:
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.exe" --file "Docker.exe" -R
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.dmg" --file "Docker.dmg" -R
         env:
-          GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}
-          BUILD_NUMBER=${{github.event.inputs.BUILD_NUMBER}}
-          DOCKER_CHANNEL=${{github.event.inputs.DOCKER_CHANNEL}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          BUILD_NUMBER: ${{github.event.inputs.BUILD_NUMBER}}
+          DOCKER_CHANNEL: ${{github.event.inputs.DOCKER_CHANNEL}}

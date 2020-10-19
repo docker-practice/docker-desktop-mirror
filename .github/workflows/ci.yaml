@@ -1,4 +1,6 @@
 on:
+  schedule:
+  - cron: '0 0 * * 4'  
   push:
   workflow_dispatch:
     inputs:
@@ -28,8 +30,15 @@ jobs:
           curl https://download.docker.com/mac/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker.dmg -O
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.exe" --file "Docker.exe" -R
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.dmg" --file "Docker.dmg" -R
+
+          for PKG in 'Docker.exe Docker.dmg'
+          do
+            curl -T ${PKG} -u ${CODING_USERNAME}:${CODING_TOKEN} "https://pcit-generic.pkg.coding.net/khs1994-docker/docker-desktop/${PKG}?version=${DOCKER_CHANNEL:-edge}"
+          done
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           BUILD_NUMBER: ${{github.event.inputs.BUILD_NUMBER}}
           DOCKER_CHANNEL: ${{github.event.inputs.DOCKER_CHANNEL}}
           GO111MODULE: off
+          CODING_USERNAME: ${{secrets.CODING_USERNAME}}
+          CODING_TOKEN: ${{secrets.CODING_TOKEN}}

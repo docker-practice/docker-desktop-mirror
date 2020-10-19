@@ -22,7 +22,7 @@ jobs:
           go get github.com/aktau/github-release
           go env
           github-release --help
-          if [ -n "$BUILD_NUMBER" ];then BUILD_NUMBER="${BUILD_NUMBER}/"
+          if [ -n "$BUILD_NUMBER" ];then BUILD_NUMBER="${BUILD_NUMBER}/"; fi
           curl https://download.docker.com/win/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker%20Desktop%20Installer.exe -o Docker.exe
           curl https://download.docker.com/mac/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker.dmg -O
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.exe" --file "Docker.exe" -R

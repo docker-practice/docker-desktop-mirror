@@ -31,7 +31,7 @@ jobs:
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.exe" --file "Docker.exe" -R
           github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.dmg" --file "Docker.dmg" -R
 
-          for PKG in 'Docker.exe Docker.dmg'
+          for PKG in $(echo Docker.exe Docker.dmg)
           do
             curl -T ${PKG} -u ${CODING_USERNAME}:${CODING_TOKEN} "https://pcit-generic.pkg.coding.net/khs1994-docker/docker-desktop/${PKG}?version=${DOCKER_CHANNEL:-edge}"
           done

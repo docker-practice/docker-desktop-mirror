@@ -21,6 +21,7 @@ jobs:
           set -x
           go get github.com/aktau/github-release
           go env
+          export PATH=/home/runner/go/bin:$PATH
           github-release --help
           if [ -n "$BUILD_NUMBER" ];then BUILD_NUMBER="${BUILD_NUMBER}/"; fi
           curl https://download.docker.com/win/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker%20Desktop%20Installer.exe -o Docker.exe
@@ -31,3 +32,4 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           BUILD_NUMBER: ${{github.event.inputs.BUILD_NUMBER}}
           DOCKER_CHANNEL: ${{github.event.inputs.DOCKER_CHANNEL}}
+          GO111MODULE: off

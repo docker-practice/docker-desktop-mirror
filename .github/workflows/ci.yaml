@@ -11,7 +11,7 @@ on:
       DOCKER_CHANNEL:
         description: edge or stable
         required: true
-        default: edge
+        default: stable
 
 name: ci
 
@@ -26,14 +26,14 @@ jobs:
           export PATH=/home/runner/go/bin:$PATH
           github-release --help
           if [ -n "$BUILD_NUMBER" ];then BUILD_NUMBER="${BUILD_NUMBER}/"; fi
-          curl https://download.docker.com/win/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker%20Desktop%20Installer.exe -o Docker.exe
-          curl https://download.docker.com/mac/${DOCKER_CHANNEL:-edge}/${BUILD_NUMBER}Docker.dmg -O
-          github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.exe" --file "Docker.exe" -R
-          github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-edge} --name "Docker.dmg" --file "Docker.dmg" -R
+          curl https://desktop.docker.com/win/${DOCKER_CHANNEL:-stable}/${BUILD_NUMBER}Docker%20Desktop%20Installer.exe -o Docker.exe
+          curl https://desktop.docker.com/mac/${DOCKER_CHANNEL:-stable}/${BUILD_NUMBER}Docker.dmg -O
+          github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-stable} --name "Docker.exe" --file "Docker.exe" -R
+          github-release upload --user khs1994-docker --repo docker-desktop-mirror --tag ${DOCKER_CHANNEL:-stable} --name "Docker.dmg" --file "Docker.dmg" -R
 
           for PKG in $(echo Docker.exe Docker.dmg)
           do
-            curl -T ${PKG} -u ${CODING_USERNAME}:${CODING_TOKEN} "https://pcit-generic.pkg.coding.net/khs1994-docker/docker-desktop/${PKG}?version=${DOCKER_CHANNEL:-edge}"
+            curl -T ${PKG} -u ${CODING_USERNAME}:${CODING_TOKEN} "https://pcit-generic.pkg.coding.net/khs1994-docker/docker-desktop/${PKG}?version=${DOCKER_CHANNEL:-stable}"
           done
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
